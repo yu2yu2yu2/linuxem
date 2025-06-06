@@ -1,0 +1,266 @@
+##########################################
+模块: 📊 统计分析总览
+##########################################
+------------------------------------------
+子项: 系统概览
+------------------------------------------
+系统信息:
+操作系统: Ubuntu 20.04.3 LTS
+内核版本: 5.4.0-91-generic
+主机名: web-server-01
+运行时间: 15 days, 3:42
+
+------------------------------------------
+子项: 风险评估
+------------------------------------------
+当前风险等级: MEDIUM
+风险评分: 45/100
+主要风险点:
+- 发现可疑进程活动
+- 登录失败次数较多
+- 部分服务配置存在安全隐患
+
+##########################################
+模块: 🔍 系统后门排查
+##########################################
+------------------------------------------
+子项: UID为0的非root用户
+------------------------------------------
+检查结果:
+root:x:0:0:root:/root:/bin/bash
+
+未发现可疑UID 0用户
+
+------------------------------------------
+子项: 可疑系统配置
+------------------------------------------
+检查/etc/passwd文件权限:
+-rw-r--r-- 1 root root 1623 Dec  1 10:30 /etc/passwd
+
+检查/etc/shadow文件权限:
+-rw-r----- 1 root shadow 1234 Dec  1 10:30 /etc/shadow
+
+配置文件权限正常
+
+------------------------------------------
+子项: 异常系统文件
+------------------------------------------
+检查系统关键文件:
+/bin/bash: 正常
+/bin/sh: 正常
+/usr/bin/sudo: 正常
+
+未发现异常系统文件
+
+##########################################
+模块: 👥 用户与登录检查
+##########################################
+------------------------------------------
+子项: 当前用户
+------------------------------------------
+当前登录用户:
+root     pts/0        2023-12-01 10:30 (192.168.1.100)
+admin    pts/1        2023-12-01 11:15 (192.168.1.101)
+
+------------------------------------------
+子项: 所有用户
+------------------------------------------
+系统用户列表:
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/var/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+systemd-timesync:x:102:104:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:103:106::/nonexistent:/usr/sbin/nologin
+syslog:x:104:110::/home/syslog:/usr/sbin/nologin
+_apt:x:105:65534::/nonexistent:/usr/sbin/nologin
+tss:x:106:111:TPM software stack,,,:/var/lib/tpm:/bin/false
+uuidd:x:107:112::/run/uuidd:/usr/sbin/nologin
+tcpdump:x:108:113::/nonexistent:/usr/sbin/nologin
+sshd:x:109:65534::/run/sshd:/usr/sbin/nologin
+landscape:x:110:115::/var/lib/landscape:/usr/sbin/nologin
+pollinate:x:111:1::/var/cache/pollinate:/bin/false
+ubuntu:x:1000:1000:Ubuntu,,,:/home/ubuntu:/bin/bash
+admin:x:1001:1001:Admin User,,,:/home/admin:/bin/bash
+
+------------------------------------------
+子项: 最近登录记录
+------------------------------------------
+最近登录记录:
+admin    pts/1        Fri Dec  1 11:15   still logged in
+root     pts/0        Fri Dec  1 10:30   still logged in
+admin    pts/0        Thu Nov 30 16:45 - 18:30  (01:45)
+root     console      Thu Nov 30 09:00 - 09:05  (00:05)
+
+------------------------------------------
+子项: 登录失败记录
+------------------------------------------
+登录失败记录:
+Dec  1 09:15:23 web-server-01 sshd[1234]: Failed password for invalid user test from 192.168.1.200 port 22 ssh2
+Dec  1 09:15:25 web-server-01 sshd[1235]: Failed password for invalid user admin from 192.168.1.200 port 22 ssh2
+Dec  1 09:15:27 web-server-01 sshd[1236]: Failed password for root from 192.168.1.200 port 22 ssh2
+Dec  1 09:15:29 web-server-01 sshd[1237]: Failed password for invalid user user from 192.168.1.200 port 22 ssh2
+Dec  1 09:15:31 web-server-01 sshd[1238]: Failed password for invalid user guest from 192.168.1.200 port 22 ssh2
+
+##########################################
+模块: 🌐 网络检查
+##########################################
+------------------------------------------
+子项: 监听端口
+------------------------------------------
+监听端口列表:
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      1234/sshd: /usr/sbi
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      5678/nginx: master
+tcp        0      0 0.0.0.0:443             0.0.0.0:*               LISTEN      5678/nginx: master
+tcp        0      0 127.0.0.1:3306          0.0.0.0:*               LISTEN      9012/mysqld
+tcp6       0      0 :::22                   :::*                    LISTEN      1234/sshd: /usr/sbi
+tcp6       0      0 :::80                   :::*                    LISTEN      5678/nginx: master
+tcp6       0      0 :::443                  :::*                    LISTEN      5678/nginx: master
+
+------------------------------------------
+子项: 活动连接
+------------------------------------------
+当前网络连接:
+tcp        0      0 192.168.1.10:22         192.168.1.100:54321     ESTABLISHED 2345/sshd: root [pr
+tcp        0      0 192.168.1.10:22         192.168.1.101:54322     ESTABLISHED 2346/sshd: admin [p
+
+------------------------------------------
+子项: 网络配置
+------------------------------------------
+网络接口配置:
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.1.10  netmask 255.255.255.0  broadcast 192.168.1.255
+        inet6 fe80::a00:27ff:fe4e:66a1  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:4e:66:a1  txqueuelen 1000  (Ethernet)
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+
+##########################################
+模块: ⚙️ 进程检查
+##########################################
+------------------------------------------
+子项: 高CPU占用进程
+------------------------------------------
+高CPU占用进程:
+PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+1234 root      20   0  107936   4568   3584 S   2.3  0.2   0:01.23 sshd
+5678 www-data  20   0  125696  12345   8765 S   1.8  0.6   0:05.67 nginx
+9012 mysql     20   0 1234567 123456  45678 S   1.2  6.1   1:23.45 mysqld
+
+------------------------------------------
+子项: 可疑脚本进程
+------------------------------------------
+可疑脚本进程:
+PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+3456 www-data  20   0   12345   2345   1234 S   0.1  0.1   0:00.12 /bin/bash /var/www/backup.sh
+7890 admin     20   0   23456   3456   2345 S   0.0  0.2   0:00.05 python3 /home/admin/monitor.py
+
+##########################################
+模块: 📁 文件系统检查
+##########################################
+------------------------------------------
+子项: SUID文件
+------------------------------------------
+SUID文件列表:
+-rwsr-xr-x 1 root root 67816 Apr 16  2020 /usr/bin/su
+-rwsr-xr-x 1 root root 88464 Mar 22  2019 /usr/bin/gpasswd
+-rwsr-xr-x 1 root root 63736 Mar 22  2019 /usr/bin/passwd
+-rwsr-xr-x 1 root root 52880 Mar 22  2019 /usr/bin/chfn
+-rwsr-xr-x 1 root root 44784 Mar 22  2019 /usr/bin/chsh
+-rwsr-xr-x 1 root root 40344 Mar 22  2019 /usr/bin/newgrp
+-rwsr-xr-x 1 root root 149080 Jan 31  2020 /usr/bin/sudo
+-rwsr-xr-x 1 root root 22840 Aug 16  2019 /usr/bin/pkexec
+
+------------------------------------------
+子项: 最近修改的文件
+------------------------------------------
+最近24小时内修改的文件:
+-rw-r--r-- 1 root root 1234 Dec  1 11:30 /var/log/auth.log
+-rw-r--r-- 1 root root 5678 Dec  1 11:25 /var/log/syslog
+-rw-r--r-- 1 www-data www-data 9012 Dec  1 11:20 /var/www/html/access.log
+-rw-r--r-- 1 admin admin 345 Dec  1 11:15 /home/admin/.bash_history
+
+##########################################
+模块: 🔄 持久化检查
+##########################################
+------------------------------------------
+子项: 自启动服务
+------------------------------------------
+启用的系统服务:
+ssh.service                           enabled
+nginx.service                         enabled
+mysql.service                         enabled
+cron.service                          enabled
+systemd-timesyncd.service            enabled
+
+------------------------------------------
+子项: 计划任务
+------------------------------------------
+系统计划任务:
+# /etc/crontab: system-wide crontab
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# m h dom mon dow user  command
+17 *    * * *   root    cd / && run-parts --report /etc/cron.hourly
+25 6    * * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
+47 6    * * 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
+52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
+
+用户计划任务:
+admin: 0 2 * * * /home/admin/backup.sh
+
+------------------------------------------
+子项: SSH公钥
+------------------------------------------
+SSH授权密钥:
+/root/.ssh/authorized_keys:
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC... root@management-server
+
+/home/admin/.ssh/authorized_keys:
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQD... admin@workstation
+
+##########################################
+模块: 🛡️ 系统完整性
+##########################################
+------------------------------------------
+子项: 关键二进制文件校验
+------------------------------------------
+关键系统文件校验:
+/bin/bash: OK
+/bin/sh: OK
+/usr/bin/sudo: OK
+/usr/sbin/sshd: OK
+/usr/bin/passwd: OK
+
+所有关键文件校验通过
+
+------------------------------------------
+子项: 系统文件完整性
+------------------------------------------
+系统文件完整性检查:
+检查 /etc/passwd: 正常
+检查 /etc/shadow: 正常
+检查 /etc/group: 正常
+检查 /etc/sudoers: 正常
+
+系统配置文件完整性正常
